@@ -18,12 +18,12 @@ from sqlalchemy import create_engine
 holidaydf = pd.read_excel('HolidayList.xlsx', sheet_name='Sheet1')
 holidaylist=[item.date() for item in holidaydf['Date'].tolist()]
 
-start_date = date(2012,1,1)
-end_date = date(2013,1,1)
+start_date = date(2018,4,1)
+end_date = date(2019,4,1)
 
 filename = 'output'
-find_start_date = "02-JAN-2012"
-find_end_date = "01-JAN-2013"
+script_start_date = "02-APR-2018"
+script_end_date = "31-MAR-2019"
 def getNSEDailyQuote(start_date,end_date,filename):
 
     day_count = (end_date - start_date).days + 1
@@ -42,18 +42,13 @@ def getNSEDailyQuote(start_date,end_date,filename):
 def readNSEDailyQuote(filename,stock_name,series='EQ',find_start_date=None,find_end_date=None):
 
     data = pd.read_csv('{}.csv'.format(filename),names= getNSEDailyQuoteColList(),dtype=setNSEDailyQuoteColList(),usecols=list(setNSEDailyQuoteColList().keys()))
-    # data.head
+
     if stock_name:
         new_data = data.loc[(data['SYMBOL']=='{}'.format(stock_name)) & (data['SERIES']=='{}'.format(series))]
-        print(new_data)
-    if find_end_date:
-        new_data = new_data.loc[(data['TIMESTAMP'] >= find_start_date) & (new_data['TIMESTAMP'] <= find_end_date)]
-
+        
+    if find_start_date and find_end_date:
+        new_data = new_data.loc[(new_data['TIMESTAMP'] >= find_start_date) & (new_data['TIMESTAMP'] <= find_end_date)]
     return new_data
-
-    # # added .astype since it expected input in float.
-    # adxdf=pd.Series(talib.ADX(new_data['HIGH'].values.astype(float), new_data['LOW'].values.astype(float), new_data['CLOSE'].values.astype(float), timeperiod = 14), index = new_data.TIMESTAMP, name = 'ADX_%s' % str(14))
-    # # return adxdf
 
 def getNSEDailyQuoteColList():
     col_list = ['SYMBOL','SERIES','OPEN','HIGH','LOW','CLOSE','LAST','PREVCLOSE','TOTTRDQTY','TOTTRDVAL','TIMESTAMP','TOTALTRADES','ISIN']
@@ -67,7 +62,8 @@ def applyADX(nsedailyquoteDF):
     
     adxdf=pd.Series(talib.ADX(nsedailyquoteDF['HIGH'].values.astype(float), nsedailyquoteDF['LOW'].values.astype(float), nsedailyquoteDF['CLOSE'].values.astype(float), timeperiod = 14), index = nsedailyquoteDF.TIMESTAMP, name = 'ADX_%s' % str(14))
     return adxdf
+
 # getNSEDailyQuote(start_date,end_date,filename)
-nsedailyquoteDF = readNSEDailyQuote(filename,'SBIN',find_start_date=find_start_date,find_end_date=find_end_date)
+nsedailyquoteDF = readNSEDailyQuote(filename,'SBIN',find_start_date=script_start_date,find_end_date=script_end_date)
 print(applyADX(nsedailyquoteDF))
 # print(readNSEDailyQuote(filename,'SBIN'))
