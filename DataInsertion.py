@@ -87,4 +87,8 @@ finally:
     if(mydbconn.is_connected()):
         mydbconn.close()
         print("MySQL connection is closed")
-        
+  
+# Ta-lib code for analysis ADX chart
+
+adxdf=pd.Series(talib.ADX(capacite2018df['HIGH'].values, capacite2018df['LOW'].values, capacite2018df['CLOSE'].values, timeperiod = 14), index = capacite2018df.TIMESTAMP, name = 'ADX_%s' % str(14))
+lines = adxdf.plot.line()
