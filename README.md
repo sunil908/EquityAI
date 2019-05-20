@@ -28,7 +28,7 @@ Below is the ADX graph of SBIN for the period from 2-APR-2018 to 29-MAR-2019.
 
 ![ADX_graph](graphs/only_adx.png)
 
-Below is the ADX graph of SBIN for the period from 2-APR-2018 to 29-MAR-2019 along with the high proce for the same day.
+Below is the ADX graph of SBIN for the period from 2-APR-2018 to 29-MAR-2019 along with the high price for the same day.
 
 ![ADX_&_High_graph](graphs/adx_high.png)
 
