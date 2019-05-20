@@ -1,20 +1,18 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Apr 14 16:34:37 2019
+Created on Sat May 18 2019
 
-@author: sunil
+@author: Gaurang
 """
 
-import matplotlib
-matplotlib.use('PS')
 from datetime import date
 from datetime import timedelta
 import pandas as pd
 import talib
-
 from nsepy.history import get_price_list
 from sqlalchemy import create_engine
-# import 
+import matplotlib
+matplotlib.use('PS')
 
 #ta-lib library for analysis
 
@@ -27,6 +25,7 @@ end_date = date(2019,4,1)
 filename = 'output'
 script_start_date = "02-APR-2018"
 script_end_date = "31-MAR-2019"
+
 def getNSEDailyQuote(start_date,end_date,filename):
 
     day_count = (end_date - start_date).days + 1
