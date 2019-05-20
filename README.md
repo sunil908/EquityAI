@@ -1,4 +1,4 @@
-#Things completed as of now.
+## Things completed as of now.
 
 Consider this as **Documentation** as of now.
 
@@ -24,3 +24,9 @@ Consider this as **Documentation** as of now.
 - nsedailyquoteDF : expects a data frame having data of a particular script. For eg. data returned from readNSEDailyQuote can be passed on to the above function to get the Average Directional Movement Index.
 
 ---
+Below is the ADX graph of SBIN for the period from 2-APR-2018 to 29-MAR-2019.
+![ADX_graph](only_adx.png)
+
+Below is the ADX graph of SBIN for the period from 2-APR-2018 to 29-MAR-2019 along with the high proce for the same day.
+![ADX_&_High_graph](adx_high.png)
+
