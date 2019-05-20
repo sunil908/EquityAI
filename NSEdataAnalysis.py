@@ -5,6 +5,8 @@ Created on Sun Apr 14 16:34:37 2019
 @author: sunil
 """
 
+import matplotlib
+matplotlib.use('PS')
 from datetime import date
 from datetime import timedelta
 import pandas as pd
@@ -12,6 +14,7 @@ import talib
 
 from nsepy.history import get_price_list
 from sqlalchemy import create_engine
+# import 
 
 #ta-lib library for analysis
 
@@ -60,10 +63,15 @@ def setNSEDailyQuoteColList():
 
 def applyADX(nsedailyquoteDF):
     
-    adxdf=pd.Series(talib.ADX(nsedailyquoteDF['HIGH'].values.astype(float), nsedailyquoteDF['LOW'].values.astype(float), nsedailyquoteDF['CLOSE'].values.astype(float), timeperiod = 14), index = nsedailyquoteDF.TIMESTAMP, name = 'ADX_%s' % str(14))
+    adxdf = pd.Series(talib.ADX(nsedailyquoteDF['HIGH'].values, nsedailyquoteDF['LOW'].values, nsedailyquoteDF['CLOSE'].values, timeperiod = 14), index = nsedailyquoteDF.TIMESTAMP, name = 'ADX_%s' % str(14))
     return adxdf
+
+def applyADXR(nsedailyquoteDF):
+
+    adxrdf = pd.Series(talib.ADX(nsedailyquoteDF['HIGH'].values, nsedailyquoteDF['LOW'].values, nsedailyquoteDF['CLOSE'].values, timeperiod = 14), index = nsedailyquoteDF.TIMESTAMP, name = 'ADX_%s' % str(14))
+    return adxrdf
 
 # getNSEDailyQuote(start_date,end_date,filename)
 nsedailyquoteDF = readNSEDailyQuote(filename,'SBIN',find_start_date=script_start_date,find_end_date=script_end_date)
-print(applyADX(nsedailyquoteDF))
+print(applyADXR(nsedailyquoteDF))
 # print(readNSEDailyQuote(filename,'SBIN'))
