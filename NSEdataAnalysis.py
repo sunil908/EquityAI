@@ -50,6 +50,7 @@ def readNSEDailyQuote(filename,stock_name,series='EQ',find_start_date=None,find_
         
     if find_start_date and find_end_date:
         new_data = new_data.loc[(new_data['TIMESTAMP'] >= find_start_date) & (new_data['TIMESTAMP'] <= find_end_date)]
+
     return new_data
 
 def getNSEDailyQuoteColList():
@@ -63,14 +64,29 @@ def setNSEDailyQuoteColList():
 def applyADX(nsedailyquoteDF):
     
     adxdf = pd.Series(talib.ADX(nsedailyquoteDF['HIGH'].values, nsedailyquoteDF['LOW'].values, nsedailyquoteDF['CLOSE'].values, timeperiod = 14), index = nsedailyquoteDF.TIMESTAMP, name = 'ADX_%s' % str(14))
-    return adxdf
+    adxdf.to_csv('adx.csv', mode='a',index=True) 
 
 def applyADXR(nsedailyquoteDF):
 
-    adxrdf = pd.Series(talib.ADX(nsedailyquoteDF['HIGH'].values, nsedailyquoteDF['LOW'].values, nsedailyquoteDF['CLOSE'].values, timeperiod = 14), index = nsedailyquoteDF.TIMESTAMP, name = 'ADX_%s' % str(14))
+    adxrdf = pd.Series(talib.ADXR(nsedailyquoteDF['HIGH'].values, nsedailyquoteDF['LOW'].values, nsedailyquoteDF['CLOSE'].values, timeperiod = 14), index = nsedailyquoteDF.TIMESTAMP, name = 'ADX_%s' % str(14))
     return adxrdf
+
+def applyAPO(nsedailyquoteDF):
+
+    apodf = pd.Series(talib.APO(nsedailyquoteDF['CLOSE'].values, fastperiod=12, slowperiod=26, matype=0), index = nsedailyquoteDF.TIMESTAMP, name = 'ADX_%s' % str(14))
+    return apodf
+
+def applyAROONOSC(nsedailyquoteDF):
+
+    arronoscdf = pd.Series(talib.AROONOSC(nsedailyquoteDF['HIGH'].values, nsedailyquoteDF['LOW'].values, timeperiod = 14), index = nsedailyquoteDF.TIMESTAMP, name = 'ADX_%s' % str(14))
+    return arronoscdf
+
+def applyCCI(nsedailyquoteDF):
+
+    ccidf = pd.Series(talib.CCI(nsedailyquoteDF['HIGH'].values, nsedailyquoteDF['LOW'].values, nsedailyquoteDF['CLOSE'].values, timeperiod = 14), index = nsedailyquoteDF.TIMESTAMP, name = 'ADX_%s' % str(14))
+    return ccidf
 
 # getNSEDailyQuote(start_date,end_date,filename)
 nsedailyquoteDF = readNSEDailyQuote(filename,'SBIN',find_start_date=script_start_date,find_end_date=script_end_date)
-print(applyADXR(nsedailyquoteDF))
-# print(readNSEDailyQuote(filename,'SBIN'))
+print(applyCCI(nsedailyquoteDF))
+# print(readNSEDailyQuote(filename,'SBIN',find_start_date=script_start_date,find_end_date=script_end_date))
