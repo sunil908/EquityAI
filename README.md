@@ -24,6 +24,18 @@ Consider this as **Documentation** as of now.
 - nsedailyquoteDF : expects a data frame having data of a particular script. For eg. data returned from readNSEDailyQuote can be passed on to the above function to get the Average Directional Movement Index.
 
 ---
+5. **applyAPO** - Returns Absolute Price Oscillator of a particular script for anytime period passed.
+- nsedailyquoteDF : expects a data frame having data of a particular script. For eg. data returned from readNSEDailyQuote can be passed on to the above function to get the Average Directional Movement Index.
+
+---
+6. **applyAROONOSC** - Returns Aroon Oscillator of a particular script for anytime period passed.
+- nsedailyquoteDF : expects a data frame having data of a particular script. For eg. data returned from readNSEDailyQuote can be passed on to the above function to get the Average Directional Movement Index.
+
+---
+7. **applyCCI** - Returns Commodity Channel Index of a particular script for anytime period passed.
+- nsedailyquoteDF : expects a data frame having data of a particular script. For eg. data returned from readNSEDailyQuote can be passed on to the above function to get the Average Directional Movement Index.
+
+---
 Below is the ADX graph of SBIN for the period from 2-APR-2018 to 29-MAR-2019.
 
 ![ADX_graph](graphs/only_adx.png)
