@@ -47,6 +47,9 @@ Below is the ADX graph of SBIN for the period from 2-APR-2018 to 29-MAR-2019 alo
 ---
 Below is the OPEN, CLOSE, HIGH LOW data of Relaince and SBI from 1st May to 23rd May. I have created the graph as asked by Amit Sir.
 
+
 ![Reliance](graphs/Reliance.png)
+
+
 
 ![SBIN](graphs/SBIN.png)
