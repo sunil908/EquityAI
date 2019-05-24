@@ -19,12 +19,12 @@ matplotlib.use('PS')
 holidaydf = pd.read_excel('HolidayList.xlsx', sheet_name='Sheet1')
 holidaylist=[item.date() for item in holidaydf['Date'].tolist()]
 
-start_date = date(2018,4,1)
-end_date = date(2019,4,1)
+start_date = date(2019,3,1)
+end_date = date(2019,5,23)
 
 filename = 'output'
-script_start_date = "02-APR-2018"
-script_end_date = "31-MAR-2019"
+script_start_date = "02-MAR-2019"
+script_end_date = "23-MAY-2019"
 
 def getNSEDailyQuote(start_date,end_date,filename):
 
@@ -44,6 +44,7 @@ def getNSEDailyQuote(start_date,end_date,filename):
 def readNSEDailyQuote(filename,stock_name,series='EQ',find_start_date=None,find_end_date=None):
 
     data = pd.read_csv('{}.csv'.format(filename),names= getNSEDailyQuoteColList(),dtype=setNSEDailyQuoteColList(),usecols=list(setNSEDailyQuoteColList().keys()))
+    # data = pd.read_csv('latest.csv',names= getNSEDailyQuoteColList(),dtype=setNSEDailyQuoteColList(),usecols=list(setNSEDailyQuoteColList().keys()))
 
     if stock_name:
         new_data = data.loc[(data['SYMBOL']=='{}'.format(stock_name)) & (data['SERIES']=='{}'.format(series))]
@@ -51,6 +52,8 @@ def readNSEDailyQuote(filename,stock_name,series='EQ',find_start_date=None,find_
     if find_start_date and find_end_date:
         new_data = new_data.loc[(new_data['TIMESTAMP'] >= find_start_date) & (new_data['TIMESTAMP'] <= find_end_date)]
 
+    # new_data.to_csv('SBIN.csv', index=False)
+    print(new_data)
     return new_data
 
 def getNSEDailyQuoteColList():
@@ -64,7 +67,8 @@ def setNSEDailyQuoteColList():
 def applyADX(nsedailyquoteDF):
     
     adxdf = pd.Series(talib.ADX(nsedailyquoteDF['HIGH'].values, nsedailyquoteDF['LOW'].values, nsedailyquoteDF['CLOSE'].values, timeperiod = 14), index = nsedailyquoteDF.TIMESTAMP, name = 'ADX_%s' % str(14))
-    adxdf.to_csv('adx.csv', mode='a',index=True) 
+    print(adxdf)
+    adxdf.to_csv('adx.csv',index=True) 
 
 def applyADXR(nsedailyquoteDF):
 
@@ -87,6 +91,7 @@ def applyCCI(nsedailyquoteDF):
     return ccidf
 
 # getNSEDailyQuote(start_date,end_date,filename)
-nsedailyquoteDF = readNSEDailyQuote(filename,'SBIN',find_start_date=script_start_date,find_end_date=script_end_date)
-print(applyCCI(nsedailyquoteDF))
-# print(readNSEDailyQuote(filename,'SBIN',find_start_date=script_start_date,find_end_date=script_end_date))
+nsedailyquoteDF = readNSEDailyQuote(filename,'RELIANCE',find_start_date=script_start_date,find_end_date=script_end_date)
+# print(nsedailyquoteDF)
+print(applyADX(nsedailyquoteDF))
+# readNSEDailyQuote(filename,'SBIN',find_start_date=script_start_date,find_end_date=script_end_date)
