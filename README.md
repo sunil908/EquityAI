@@ -50,6 +50,7 @@ Below is the OPEN, CLOSE, HIGH LOW data of Relaince and SBI from 1st May to 23rd
 
 ![Reliance](graphs/Reliance.png)
 
+---
 
 
 ![SBIN](graphs/SBIN.png)
