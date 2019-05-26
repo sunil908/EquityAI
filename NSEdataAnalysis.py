@@ -44,7 +44,6 @@ def getNSEDailyQuote(start_date,end_date,filename):
 def readNSEDailyQuote(filename,stock_name,series='EQ',find_start_date=None,find_end_date=None):
 
     data = pd.read_csv('{}.csv'.format(filename),names= getNSEDailyQuoteColList(),dtype=setNSEDailyQuoteColList(),usecols=list(setNSEDailyQuoteColList().keys()))
-    # data = pd.read_csv('latest.csv',names= getNSEDailyQuoteColList(),dtype=setNSEDailyQuoteColList(),usecols=list(setNSEDailyQuoteColList().keys()))
 
     if stock_name:
         new_data = data.loc[(data['SYMBOL']=='{}'.format(stock_name)) & (data['SERIES']=='{}'.format(series))]
@@ -52,8 +51,6 @@ def readNSEDailyQuote(filename,stock_name,series='EQ',find_start_date=None,find_
     if find_start_date and find_end_date:
         new_data = new_data.loc[(new_data['TIMESTAMP'] >= find_start_date) & (new_data['TIMESTAMP'] <= find_end_date)]
 
-    # new_data.to_csv('SBIN.csv', index=False)
-    print(new_data)
     return new_data
 
 def getNSEDailyQuoteColList():
