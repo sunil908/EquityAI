@@ -59,5 +59,5 @@ Below is the OPEN, CLOSE, HIGH LOW data of Relaince and SBI from 1st May to 23rd
 ![Avg vs ADX](graphs/adx_vs_avg.png)
 
 ---
-
+Heatmap for first 5 functions. The places which seem to be empty are NaN values
 ![HeatMap](graphs/heatmap.png)
