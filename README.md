@@ -57,3 +57,7 @@ Below is the OPEN, CLOSE, HIGH LOW data of Relaince and SBI from 1st May to 23rd
 ---
 
 ![Avg vs ADX](graphs/adx_vs_avg.png)
+
+---
+
+![HeatMap](graphs/heatmap.png)
